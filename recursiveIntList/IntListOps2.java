@@ -5,7 +5,9 @@ package recursiveIntList;
  */
 public class IntListOps2 {
 	
-	
+	/*
+	 * Squares a list by changing its original values
+	 */
 	public static IntList squareDestructive (IntList L){
 		if (L == null)
 		{
@@ -18,7 +20,9 @@ public class IntListOps2 {
 			return L;
 		}
 	}
-	
+	/*
+	 * Squares a list by changing its original values, this time iterating through the list
+	 */
 	public static IntList squareDestructiveIterative(IntList L) {
 		IntList current = L;
 		while (current != null)
@@ -28,7 +32,9 @@ public class IntListOps2 {
 		}
 		return current;
 	}
-	
+	/*
+	 * Squares a list without changing the values of the original list
+	 */
 	public static IntList squareNonDestructive (IntList L) {
 		if (L == null)
 		{
@@ -42,7 +48,9 @@ public class IntListOps2 {
 		}
 		
 	}
-	
+	/*
+	 * Squares a list without changing the values of the original list, this time iterating through the list
+	 */
 	public static IntList squareNonDestructiveIterative (IntList L)	{
 		IntList currentOld = L;
 		IntList currentNew = null;
@@ -63,7 +71,35 @@ public class IntListOps2 {
 		}
 		return answerList;
 	}
+	
+	/*
+	 * returns a reverse copy of the list, with out changing the values of the original List
+	 */
+	
+	public static IntList reverseNonDistructiveIterative (IntList L){
+		IntList currentOld = L;
+		IntList currentNew = null;
+		while  (currentOld != null)
+		{
+			int newNead  = currentOld.head;
+			if (currentNew == null){
+				currentNew = new IntList(newNead, null);
+			}
+			else
+			{
+				IntList auxList = new IntList(newNead, null);
+				auxList.tail = currentNew;
+				currentNew = auxList; 
+				
+			}
+			currentOld  = currentOld.tail;
+		}
+		return currentNew;
+	}
 
+		/*
+		 * main
+		 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		// testing L
@@ -130,6 +166,30 @@ public class IntListOps2 {
 			System.out.println("The head of the " + i + "is : " + current.head );
 			current  = current.tail;
 		}
+		
+		System.out.println("-------------------------");
+		System.out.println("testing the method that reverses the list!");
+		// testing the method that reverses the list!
+		L = new IntList (4, null);
+		System.out.println(L.toString());
+		L = new IntList (3, L);
+		System.out.println(L.toString());
+		L = new IntList (2, L);
+		System.out.println(L.toString());
+		L  = new IntList(1, L);
+		System.out.println(L.toString());
+		
+		
+		IntList reversedList  = reverseNonDistructiveIterative(L);
+		s  = reversedList.size();
+		System.out.println("The size of the reversed list is: " + s);
+		current =  reversedList;
+		for (int i = 0; i < s; i++) {
+			System.out.println("The head of the " + i + "is : " + current.head );
+			current  = current.tail;
+		}
+		
+		
 	}
 
 }
