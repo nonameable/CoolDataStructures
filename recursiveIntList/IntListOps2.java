@@ -76,7 +76,7 @@ public class IntListOps2 {
 	 * returns a reverse copy of the list, with out changing the values of the original List
 	 */
 	
-	public static IntList reverseNonDistructiveIterative (IntList L){
+	public static IntList reverseNonDestructiveIterative (IntList L){
 		IntList currentOld = L;
 		IntList currentNew = null;
 		while  (currentOld != null)
@@ -95,6 +95,32 @@ public class IntListOps2 {
 			currentOld  = currentOld.tail;
 		}
 		return currentNew;
+	}
+	
+	public static void  reverseDestructiveIterative (IntList L){
+		IntList currentOld = L;
+		IntList currentNew = null;
+		IntList auxList = null;
+		
+		while  (currentOld != null)
+		{
+			int newNead  = currentOld.head;
+			if (currentNew == null){
+				currentNew = currentOld;
+				System.out.println("head now is : " + currentNew.head);
+			}
+			else
+			{
+				
+				auxList = currentOld.tail;
+				currentOld.tail = currentNew;
+				currentNew  = currentOld;
+				System.out.println("head now is : " + currentNew.head);
+				currentOld  = auxList;
+			}
+			
+		}
+		//return currentNew;
 	}
 
 		/*
@@ -178,9 +204,10 @@ public class IntListOps2 {
 		System.out.println(L.toString());
 		L  = new IntList(1, L);
 		System.out.println(L.toString());
+		System.out.println("The head now is: " + L.head);
 		
-		
-		IntList reversedList  = reverseNonDistructiveIterative(L);
+		IntList reversedList  = reverseNonDestructiveIterative(L);
+		System.out.println("The head now is: " + reversedList.head);
 		s  = reversedList.size();
 		System.out.println("The size of the reversed list is: " + s);
 		current =  reversedList;
@@ -189,6 +216,28 @@ public class IntListOps2 {
 			current  = current.tail;
 		}
 		
+		System.out.println("-------------------------");
+		System.out.println("testing the method that reverses the list destructing it!");
+		// testing the method that reverses the list!
+		L = new IntList (4, null);
+		System.out.println(L.toString());
+		L = new IntList (3, L);
+		System.out.println(L.toString());
+		L = new IntList (2, L);
+		System.out.println(L.toString());
+		L  = new IntList(1, L);
+		System.out.println(L.toString());
+		
+		System.out.println("The head now is: " + L.head);
+		reverseDestructiveIterative(L);
+		//s  = L.size();
+		System.out.println("The head of the now reversed is: " + L.head);
+		//System.out.println("The size of the destructed reversed list is: " + s);
+		current =  L;
+		for (int i = 0; i < s; i++) {
+			System.out.println("The head of the " + i + "is : " + current.head );
+			current  = current.tail;
+		}
 		
 	}
 
