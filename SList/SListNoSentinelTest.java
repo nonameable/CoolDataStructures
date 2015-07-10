@@ -2,11 +2,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class SListTest {
+public class SListNoSentinelTest {
 
 	@Test
 	public void testSize (){
-		SList L = new SList(5);
+		SListNoSentinel L = new SListNoSentinel(5);
 		L.insertFront(6);
 		assertEquals(2, L.size());
 
@@ -14,7 +14,7 @@ public class SListTest {
 
 	@Test
 	public void testSizeRecursive(){
-		SList L = new SList(5);
+		SListNoSentinel L = new SListNoSentinel(5);
 		L.insertFront(6);
 		L.insertFront(7);
 		L.insertFront(8);
@@ -25,7 +25,7 @@ public class SListTest {
 	}
 
 	public static void main (String[]  args){
-			jh61b.junit.textui.runClasses(SListTest.class);
+			jh61b.junit.textui.runClasses(SListNoSentinelTest.class);
 		}
 
 }

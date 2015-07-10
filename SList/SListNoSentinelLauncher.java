@@ -5,7 +5,7 @@ public class SListLauncher {
  */
 	public static void main (String[] args)
 	{
-		SList x = new SList(100);
+		SListNoSentinel x = new SListNoSentinel(100);
 		 
 		// take into consideration that for them front is pointing to the head of the SList
 		System.out.println(x.front.item);
@@ -15,7 +15,7 @@ public class SListLauncher {
 		// x: 100 -> 5
 		System.out.println(x.front.next.item);
 
-		SList y  = x;
+		SListNoSentinel y  = x;
 		// y: 100 -> 5
 
 		System.out.println(y.front.next.item);
@@ -26,7 +26,7 @@ public class SListLauncher {
 
 		System.out.println(y.front.item); // this should be 99
 
-		//x = new SList();
+		//x = new SListNoSentinel();
 		//System.out.println(x.size());
 
 

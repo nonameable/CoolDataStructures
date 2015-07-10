@@ -9,30 +9,38 @@ public class SListNoSentinel {
 	public int size;
 
 	// constructor
-	public SList (int x) {
+	public SListNoSentinel (int x) {
 		front = new IntNode(x, null);
 		size = 1;
 	}
 
-	public SList (){
+	public SListNoSentinel (){
 		front =  null;
 		size = 0;
 	}
 
 	public void insertBack (int x){
-		// lets use a pointer here
-		IntNode p = front;
-		// step p along the list until p.next == null, thereofre, p is the last 
-		// item on the list. 
 
-		while (p.next != null) {
-			p = p.next;
+		if (front != null)
+		{
+			// lets use a pointer here
+			IntNode p = front;
+			// step p along the list until p.next == null, thereofre, p is the last 
+			// item on the list. 
+
+			while (p.next != null) {
+				p = p.next;
+			}
+			// here we know p is the last one and the natural thing to do is simply add to next and replace null
+			p.next = new IntNode(x, null); // <- new IntNode at the back.
+
+			// add +1 to the size attribute
+			size++;
 		}
-		// here we know p is the last one and the natural thing to do is simply add to next and replace null
-		p.next = new IntNode(x, null); // <- new IntNode at the back.
-
-		// add +1 to the size attribute
-		size++;
+		else {
+			front = new IntNode (x, null);
+		}
+		
 	}
 
 	public void insertFront(int x) {
