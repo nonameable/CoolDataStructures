@@ -8,19 +8,26 @@ public class SListLauncher {
 		SList x = new SList(100);
 		 
 		// take into consideration that for them front is pointing to the head of the SList
+		System.out.println(x.front.item);
+		
 
 		x.insertBack(5);
 		// x: 100 -> 5
+		System.out.println(x.front.next.item);
 
-		Slist y  = x;
+		SList y  = x;
 		// y: 100 -> 5
+
+		System.out.println(y.front.next.item);
 
 		x.insertFront(99);
 		//x: 99 -> 100 -> 5
 		//y: 99 -> 100 -> 5
 
-		x = new SList();
-		System.out.println(x.size());
+		System.out.println(y.front.item); // this should be 99
+
+		//x = new SList();
+		//System.out.println(x.size());
 
 
 	}
