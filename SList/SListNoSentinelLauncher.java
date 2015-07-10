@@ -1,8 +1,11 @@
-public class SListLauncher {
+
 
 /** Demonstrates the power and elegance of this implementation of an SList
  * @author David M. Delgado, version of the SList by John Hug, UCBerkeley
  */
+
+public class SListNoSentinelLauncher {
+
 	public static void main (String[] args)
 	{
 		SListNoSentinel x = new SListNoSentinel(100);
