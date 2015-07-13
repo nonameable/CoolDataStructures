@@ -5,6 +5,29 @@ import static org.junit.Assert.*;
 public class SListNoSentinelTest {
 
 	@Test
+	public void testOperationsEmpty () {
+		
+		// tests insertBack
+		SListNoSentinel L = new SListNoSentinel();
+		L.insertBack(5);
+		assertEquals(1, L.size());
+		// tests insertFront
+		L.insertFront(6);
+		assertEquals(2, L.size());
+
+	}
+
+
+	@Test
+	public void testEmpty (){
+		SListNoSentinel L = new SListNoSentinel();
+		assertEquals(0, L.size()); 
+	}
+
+
+
+
+	@Test
 	public void testSize (){
 		SListNoSentinel L = new SListNoSentinel(5);
 		L.insertFront(6);

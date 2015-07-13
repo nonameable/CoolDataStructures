@@ -34,13 +34,14 @@ public class SListNoSentinel {
 			// here we know p is the last one and the natural thing to do is simply add to next and replace null
 			p.next = new IntNode(x, null); // <- new IntNode at the back.
 
-			// add +1 to the size attribute
-			size++;
 		}
 		else {
 			front = new IntNode (x, null);
 		}
 		
+		// add +1 to the size attribute
+		size++;
+
 	}
 
 	public void insertFront(int x) {
