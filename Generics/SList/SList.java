@@ -1,4 +1,4 @@
-/** Generics SList , controller of the head and structure of the list.
+/** Generics SList (circular), controller of the head and structure of the list.
  * This SList uses a sentinel node to have easier algorithms and more efficent operations.
  * @author David M. Delgado
  */
@@ -19,7 +19,7 @@ public class Slist <T> {
 	// -----------------------------------------------------------------
 	public SList(T pElement){
 		front = new Node <T>("Sentinel", null); // there is a problem with the sentinel, which is not defined until the list is declared.
-		front.insertNext(new Node <T>(pElement, null));
+		front.insertNext(new Node <T>(pElement, front));
 		size = 1;
 	}
 
@@ -42,7 +42,7 @@ public class Slist <T> {
 			p = p.next;
 		}
 		// here we know p is the last one and the natural thing to do is simply add to next and replace null
-		p.next  = new Node <T>(pElement, null); // <- new Node at the back.
+		p.next  = new Node <T>(pElement, front); // <- new Node at the back.
 
 		size++;
 	}
@@ -57,7 +57,7 @@ public class Slist <T> {
 		}
 		// here we know p is the last one and the natural thing to do is simply add to next and replace null
 		p.next  = pNode; // <- new Node at the back.
-		pNode.next = null;
+		pNode.next = front;
 		size++;
 	}
 
