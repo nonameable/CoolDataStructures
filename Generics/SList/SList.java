@@ -17,9 +17,9 @@ public class Slist <T> {
 	// -----------------------------------------------------------------
 	// Constructors
 	// -----------------------------------------------------------------
-	public SList(T pHead){
+	public SList(T pElement){
 		front = new Node <T>("Sentinel", null); // there is a problem with the sentinel, which is not defined until the list is declared.
-		front.insertNext(new Node <T>(pHead, null));
+		front.insertNext(new Node <T>(pElement, null));
 		size = 1;
 	}
 
@@ -42,7 +42,7 @@ public class Slist <T> {
 			p = p.next;
 		}
 		// here we know p is the last one and the natural thing to do is simply add to next and replace null
-		p.next  = new Node <T>(pHead, null); // <- new IntNode at the back.
+		p.next  = new Node <T>(pElement, null); // <- new Node at the back.
 
 		size++;
 	}
