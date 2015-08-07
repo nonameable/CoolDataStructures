@@ -9,7 +9,7 @@ public class Slist <T> {
 	// -----------------------------------------------------------------
 	// Atributes
 	// -----------------------------------------------------------------
-	public Node front;
+	public Node <T> front;
 	public int size;
 
 	
@@ -18,13 +18,13 @@ public class Slist <T> {
 	// Constructors
 	// -----------------------------------------------------------------
 	public SList(T pHead){
-		front = new Node ("Sentinel", null);
-		front.insertNext(new Node(pHead, null));
+		front = new Node <T>("Sentinel", null); // there is a problem with the sentinel, which is not defined until the list is declared.
+		front.insertNext(new Node <T>(pHead, null));
 		size = 1;
 	}
 
 	public SList(){
-		front = new Node ("Sentinel", null);
+		front = new Node <T> ("Sentinel", null);
 		size = 0;
 	}
 
@@ -36,13 +36,13 @@ public class Slist <T> {
 	public void insertBack(T pElement) {
 		// the sentinel nodes guaratees that the fornt is enver going to be null.
 		// lets use a reference here
-		Node p = front;
+		Node <T>  p = front;
 		// step p along the list until p.next == null, thereofre, p is the last item on the list. 
 		while (p.next != null) {
 			p = p.next;
 		}
 		// here we know p is the last one and the natural thing to do is simply add to next and replace null
-		p.next  = new Node(pHead, null); // <- new IntNode at the back.
+		p.next  = new Node <T>(pHead, null); // <- new IntNode at the back.
 
 		size++;
 	}
@@ -50,7 +50,7 @@ public class Slist <T> {
 	public void insertNodeBack(Node<T> pNode) {
 		// the sentinel nodes guaratees that the fornt is enver going to be null.
 		// lets use a reference here
-		Node p = front;
+		Node <T> p = front;
 		// step p along the list until p.next == null, thereofre, p is the last item on the list. 
 		while (p.next != null) {
 			p = p.next;
@@ -64,12 +64,12 @@ public class Slist <T> {
 
 	/** Inserts a new node with Element in front of the list*/
 	public void insertFront(T pElement) {
-		front.next = new IntNode(pElement, front.next);
+		front.next = new Node <T>(pElement, front.next);
 		size++;
 	}
 	/** Inserts a previously defined Node in front of the list*/
 	public void insertNodeFront(Node<T> pNode) {
-		Node previousHead = front.next;
+		Node <T> previousHead = front.next;
 		front.next = pNode;
 		pNode.next = previousHead;
 		size++;
@@ -79,12 +79,12 @@ public class Slist <T> {
 	public void insertElement (T pElement, int position){
 		if (! (position < size) || position < 0 )
 		{
-			Node p = front;
+			Node <T> p = front;
 			// step p along the list until p.next == null, therefore, p is the last item on the list. 
 			while (p.next != null) {
 					p = p.next;
 			}
-			p.next = new IntNode(pElement, null);
+			p.next = new Node <T>(pElement, null);
 		}
 		else {
 			// it should throws and Exception and inform the user.
@@ -99,7 +99,7 @@ public class Slist <T> {
 		}
 			
 		int currentPosition = 0;
-		Node p = front;
+		Node <T> p = front;
 		while (currentPosition < position){
 			p = p.next;
 			currentPosition = currentPosition + 1;
@@ -115,7 +115,7 @@ public class Slist <T> {
 		}
 			
 		int currentPosition = 0;
-		Node p = front;
+		Node <T> p = front;
 		while (currentPosition < position){
 			p = p.next;
 			currentPosition = currentPosition + 1;
@@ -140,7 +140,7 @@ public class Slist <T> {
 
 	/** gets the element at the back of the list If position is not valid ? */
 	public T getBack(){  // the problem is, this is doesn't consider an empty list
-		Node p = front;
+		Node <T> p = front;
 		// step p along the list until p.next == null, thereofre, p is the last 
 		// item on the list. 
 
@@ -152,7 +152,7 @@ public class Slist <T> {
 
 	/** gets the node at the back of the list If position is not valid ? */
 	public T getBack(){  // the problem is, this is doesn't consider an empty list
-		Node p = front;
+		Node <T> p = front;
 		// step p along the list until p.next == null, thereofre, p is the last 
 		// item on the list. 
 
