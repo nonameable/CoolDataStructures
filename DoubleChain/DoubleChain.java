@@ -15,6 +15,7 @@ public class DoubleChain {
 		DNode newNode  = new DNode (value, front, front);
 		front.next = newNode;
 		front.prev = newNode;
+		size = 1;
 	}
 	public DoubleChain (){
 		front = new DNode(21321434, null, null);

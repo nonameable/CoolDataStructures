@@ -1,25 +1,21 @@
-/** Node of an SList, generics version.
- * @author David M. Delgado
+/** Node of an DoubleChain (Doubly linked list - circular ) Java Generics Version
+ * @author David M. Delgado 
  */
-public class Node <T>{
-	
+public class DNode <T>{
+
 	// -----------------------------------------------------------------
 	// Atributes
 	// -----------------------------------------------------------------
 	public T element;
-	public Node <T> next;
-
-	
+	public DNode <T> prev;
+	public DNode <T> next;
 
 	// -----------------------------------------------------------------
 	// Constructors
 	// -----------------------------------------------------------------
-	public IntNode (T pElement, Node <T> pNext) {
-		element  = pElement;
+	public DNode (T pElement, DNode <T> pPrev, DNode <T> pNext){
+		val = i;
+		prev = pPrev;
 		next = pNext;
 	}
-	
-	
-
-
 }
