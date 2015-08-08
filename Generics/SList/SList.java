@@ -76,7 +76,7 @@ public class Slist <T> {
 	}
 
 	/** inserts an element given a position. If position is not valid ? */
-	public void insertElement (T pElement, int position){
+	public void insertElement (T pElement, int position) throws Exception{
 		if (! (position < size) || position < 0 )
 		{
 			Node <T> p = front;
@@ -87,15 +87,14 @@ public class Slist <T> {
 			p.next = new Node <T>(pElement, null);
 		}
 		else {
-			// it should throws and Exception and inform the user.
+			throws InvalidPositionException ("The position  to insert is invalid.");
 		}
 	}
 
-	/** get an element item given a position. If position is not valid ? */
-	public T get (int position) {
+	/** get an element item given a position. If position is not valid throws InvalidPositionException */
+	public T get (int position)  throws Exception{
 		if ((! (position < size)) && (position < 0) ){
-			//it should throws an Exception and inform the user.
-			return;
+			throw new InvalidPositionException ("The position is invalid");
 		}
 			
 		int currentPosition = 0;
@@ -107,11 +106,10 @@ public class Slist <T> {
 		return p.next.element;
 	}
 
-	/** gets a node  given a position. If position is not valid ? */
-	public Node<T> get (int position) {
+	/** gets a node  given a position. If position is not valid throws InvalidPositionException */
+	public Node<T> get (int position) throws Exception {
 		if ((! (position < size)) && (position < 0) ){
-			//it should throws an Exception and inform the user.
-			return;
+			throw new InvalidPositionException ("The position is invalid.");
 		}
 			
 		int currentPosition = 0;
@@ -129,37 +127,55 @@ public class Slist <T> {
 	}
 
 	/** gets the element at the front of the list If position is not valid ? */
-	public T getFront(){
-		return front.next.element; // the problem is, this is doesn't consider an empty list
+	public T getFront() throws Exception{
+		if(size > 0)
+			return front.next.element; 
+		else
+			throw new SListEmptyException ("The list is empty, cannot get front element.");
 	}
 
 	/** gets the node at the front of the list If position is not valid ? */
-	public Node<T> getFront(){
-		return front.next; // the problem is, this is doesn't consider an empty list
+	public Node<T> getFront() throws Exception{
+		if(size > 0)
+			return front.next; 
+		else
+			throw new SListEmptyException ("The list is empty, cannot get front node.");
 	}
 
 	/** gets the element at the back of the list If position is not valid ? */
-	public T getBack(){  // the problem is, this is doesn't consider an empty list
-		Node <T> p = front;
-		// step p along the list until p.next == null, thereofre, p is the last 
-		// item on the list. 
+	public T getBack() throws Exception{  // the problem is, this is doesn't consider an empty list
+			
+		if (size > 0){
+			Node <T> p = front;
+			// step p along the list until p.next == null, thereofre, p is the last 
+			// item on the list. 
 
-		while (p.next != null) {
-				p = p.next;
+			while (p.next != null) {
+					p = p.next;
+			}
+			return p.element;
 		}
-		return p.element;
+		else {
+			throw new SListEmptyException ("The list is empty, cannot get back element.");
+		}
+		
 	}
 
 	/** gets the node at the back of the list If position is not valid ? */
-	public T getBack(){  // the problem is, this is doesn't consider an empty list
-		Node <T> p = front;
-		// step p along the list until p.next == null, thereofre, p is the last 
-		// item on the list. 
+	public T getBack() throws Exception{  // the problem is, this is doesn't consider an empty list
+		if (size > 0){
+			Node <T> p = front;
+			// step p along the list until p.next == null, thereofre, p is the last 
+			// item on the list. 
 
-		while (p.next != null) {
-				p = p.next;
+			while (p.next != null) {
+					p = p.next;
+			}
+			return p;
 		}
-		return p;
+		else {
+			throw new SListEmptyException ("The list is empty, cannot get back node.");
+		}
 	}
 
 
