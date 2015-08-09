@@ -14,7 +14,7 @@ public class DNode <T>{
 	// Constructors
 	// -----------------------------------------------------------------
 	public DNode (T pElement, DNode <T> pPrev, DNode <T> pNext){
-		val = i;
+		element = pElement;
 		prev = pPrev;
 		next = pNext;
 	}
