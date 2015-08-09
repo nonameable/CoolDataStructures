@@ -18,7 +18,7 @@ public class Slist <T> {
 	// Constructors
 	// -----------------------------------------------------------------
 	public SList(T pElement){
-		front = new Node <T>("Sentinel", null); // there is a problem with the sentinel, which is not defined until the list is declared.
+		front = new Node <T>(null, null); // there is a problem with the sentinel, which is not defined until the list is declared.
 		front.insertNext(new Node <T>(pElement, front));
 		size = 1;
 	}
@@ -31,6 +31,9 @@ public class Slist <T> {
 	// -----------------------------------------------------------------
 	// Methods
 	// -----------------------------------------------------------------
+
+
+	/** INSERTION METHODS */
 
 	/** Inserts a new node with Element in the back of the list */
 	public void insertBack(T pElement) {
@@ -91,6 +94,9 @@ public class Slist <T> {
 		}
 	}
 
+
+	/** GET METHODS */
+
 	/** get an element item given a position. If position is not valid throws InvalidPositionException */
 	public T get (int position)  throws Exception{
 		if ((! (position < size)) && (position < 0) ){
@@ -105,6 +111,10 @@ public class Slist <T> {
 		}
 		return p.next.element;
 	}
+
+
+
+
 
 	/** gets a node  given a position. If position is not valid throws InvalidPositionException */
 	public Node<T> get (int position) throws Exception {
@@ -122,9 +132,7 @@ public class Slist <T> {
 	}
 
 
-	public int size(){
-		return size;
-	}
+	
 
 	/** gets the element at the front of the list If position is not valid ? */
 	public T getFront() throws Exception{
@@ -177,6 +185,43 @@ public class Slist <T> {
 			throw new SListEmptyException ("The list is empty, cannot get back node.");
 		}
 	}
+
+
+	/** DELETION METHODS*/
+	
+	/** This method deletes a Node given a position*/
+	public void delete (int position) {
+		if ((! (position < size)) && (position < 0) ){
+			throw new InvalidPositionException ("The position is invalid.");
+		}
+			
+		int currentPosition = 0;
+		Node <T> p = front;
+		while (currentPosition <= position){
+			if(currentPosition == position){
+				p.next= p.next.next;
+			}else
+			{
+				p = p.next;
+				currentPosition = currentPosition + 1;
+			}
+			
+		}
+	}
+
+
+
+	
+
+
+
+	public int size(){
+		return size;
+	}
+
+
+
+
 
 
 
