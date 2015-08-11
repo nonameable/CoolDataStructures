@@ -4,7 +4,7 @@
  */
 
 
-public class Slist <T> {
+public class SList <T> {
 
 	// -----------------------------------------------------------------
 	// Atributes
@@ -19,12 +19,12 @@ public class Slist <T> {
 	// -----------------------------------------------------------------
 	public SList(T pElement){
 		front = new Node <T>(null, null); // there is a problem with the sentinel, which is not defined until the list is declared.
-		front.insertNext(new Node <T>(pElement, front));
+		front.next  = new Node <T>(pElement, front);
 		size = 1;
 	}
 
 	public SList(){
-		front = new Node <T> ("Sentinel", null);
+		front = new Node <T> (null, null);
 		size = 0;
 	}
 
@@ -80,7 +80,7 @@ public class Slist <T> {
 
 	/** inserts an element given a position. If position is not valid ? */
 	public void insertElement (T pElement, int position) throws Exception{
-		if (! (position < size) || position < 0 )
+		if (! ((position > size) || position < 0) )
 		{
 			Node <T> p = front;
 			// step p along the list until p.next == null, therefore, p is the last item on the list. 
@@ -90,7 +90,7 @@ public class Slist <T> {
 			p.next = new Node <T>(pElement, null);
 		}
 		else {
-			throws InvalidPositionException ("The position  to insert is invalid.");
+			throw new InvalidPositionException ("The position  to insert is invalid.");
 		}
 	}
 
@@ -99,7 +99,7 @@ public class Slist <T> {
 
 	/** get an element item given a position. If position is not valid throws InvalidPositionException */
 	public T get (int position)  throws Exception{
-		if ((! (position < size)) && (position < 0) ){
+		if ((position > size) || (position < 0) ){
 			throw new InvalidPositionException ("The position is invalid");
 		}
 			
@@ -117,8 +117,8 @@ public class Slist <T> {
 
 
 	/** gets a node  given a position. If position is not valid throws InvalidPositionException */
-	public Node<T> get (int position) throws Exception {
-		if ((! (position < size)) && (position < 0) ){
+	public Node<T> getNode (int position) throws Exception {
+		if ((! (position > size)) && (position < 0) ){
 			throw new InvalidPositionException ("The position is invalid.");
 		}
 			
@@ -143,7 +143,7 @@ public class Slist <T> {
 	}
 
 	/** gets the node at the front of the list If position is not valid ? */
-	public Node<T> getFront() throws Exception{
+	public Node<T> getFrontNode() throws Exception{
 		if(size > 0)
 			return front.next; 
 		else
@@ -170,7 +170,7 @@ public class Slist <T> {
 	}
 
 	/** gets the node at the back of the list If position is not valid ? */
-	public T getBack() throws Exception{  // the problem is, this is doesn't consider an empty list
+	public Node<T> getBackNode() throws Exception{  // the problem is, this is doesn't consider an empty list
 		if (size > 0){
 			Node <T> p = front;
 			// step p along the list until p.next == null, thereofre, p is the last 
@@ -190,7 +190,7 @@ public class Slist <T> {
 	/** DELETION METHODS*/
 	
 	/** This method deletes a Node given a position*/
-	public void delete (int position) {
+	public void delete (int position) throws Exception {
 		if ((! (position < size)) && (position < 0) ){
 			throw new InvalidPositionException ("The position is invalid.");
 		}

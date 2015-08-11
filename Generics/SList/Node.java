@@ -14,7 +14,7 @@ public class Node <T>{
 	// -----------------------------------------------------------------
 	// Constructors
 	// -----------------------------------------------------------------
-	public IntNode (T pElement, Node <T> pNext) {
+	public Node (T pElement, Node <T> pNext) {
 		element  = pElement;
 		next = pNext;
 	}
