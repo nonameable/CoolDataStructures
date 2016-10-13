@@ -1,1 +1,4 @@
-/SortTest.class
+*.class
+*.classpath
+*.project
+
