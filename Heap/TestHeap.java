@@ -25,9 +25,26 @@ public class TestHeap extends TestCase{
         }
     }
 
+    private void setupCustomConstructor()
+    {
+      try
+      {
+        heap = new Heap(25);
+      }
+      catch (Exception e)
+      {
+        e.printStackTrace( );
+      }
+    }
+
     public void testDefaultConstructor(){
       setupDefaultConstructor();
       assertEquals(10, heap.size());
+    }
+
+    public void testCustomConstructor(){
+      setupCustomConstructor();
+      assertEquals(25, heap.size());
     }
 
 }
