@@ -2,34 +2,38 @@ package traverse;
 
 import java.util.ArrayList;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 public class BinaryTree {
-	
+
 	private BinaryNode root;
+	private boolean nodeFound = false;
 	
-	public BinaryTree(BinaryNode root){
+	public BinaryTree(BinaryNode root) {
 		this.root = root;
 	}
-	
-	public ArrayList<Integer> preOrderTraversal(){
+
+	public ArrayList<Integer> preOrderTraversal() {
 		ArrayList<Integer> list = new ArrayList<>();
 		preOrderTraversalHelper(root, list);
 		return list;
-		
+
 	}
-	
-	private void preOrderTraversalHelper(BinaryNode node, ArrayList<Integer> list) {
+
+	private void preOrderTraversalHelper(BinaryNode node,
+			ArrayList<Integer> list) {
 		list.add(node.value);
-		if(!node.isLeaf()){
-			if(node.leftChild != null){
+		if (!node.isLeaf()) {
+			if (node.leftChild != null) {
 				preOrderTraversalHelper(node.leftChild, list);
 			}
-			if(node.rightChild != null){
+			if (node.rightChild != null) {
 				preOrderTraversalHelper(node.rightChild, list);
 			}
 		}
 	}
 
-	public ArrayList<Integer> inOrderTraversal(){
+	public ArrayList<Integer> inOrderTraversal() {
 		ArrayList<Integer> list = new ArrayList<>();
 		inOrderTraversalHelper(root, list);
 		return list;
@@ -37,34 +41,107 @@ public class BinaryTree {
 
 	private void inOrderTraversalHelper(BinaryNode node,
 			ArrayList<Integer> list) {
-		if(node.leftChild != null){
+		if (node.leftChild != null) {
 			inOrderTraversalHelper(node.leftChild, list);
 		}
 		list.add(node.value);
-	
-		if(node.rightChild != null){
+
+		if (node.rightChild != null) {
 			inOrderTraversalHelper(node.rightChild, list);
 		}
-		
+
 	}
 
-	public ArrayList<Integer> postOrderTraversal(){
+	public ArrayList<Integer> postOrderTraversal() {
 		ArrayList<Integer> list = new ArrayList<>();
 		postOrderTraversalHelper(root, list);
 		return list;
 	};
-	
+
 	private void postOrderTraversalHelper(BinaryNode node,
 			ArrayList<Integer> list) {
-		
-		if(node.leftChild != null){
+
+		if (node.leftChild != null) {
 			postOrderTraversalHelper(node.leftChild, list);
 		}
-		if(node.rightChild != null){
+		if (node.rightChild != null) {
 			postOrderTraversalHelper(node.rightChild, list);
 		}
 		list.add(node.value);
+
+	}
+
+	public ArrayList<Integer> pathToNode(Integer nodeValue) {
+		ArrayList<Integer> path = new ArrayList<>();
+		boolean found = false;
+		pathToNodeHelper(root, path, nodeValue);
+		nodeFound = false;
+		return path;
+	}
+
+	private void pathToNodeHelper(BinaryNode node, ArrayList<Integer> path,
+			Integer destinyNodeValue) {
 		
+		path.add(node.value);
+		if (node.value.equals(destinyNodeValue)) {
+			nodeFound = true;
+			// exits method
+		} else {
+			if (node.leftChild != null) {
+				pathToNodeHelper(node.leftChild, path, destinyNodeValue);
+				if (nodeFound == false) {
+
+					if (node.rightChild != null) {
+						pathToNodeHelper(node.rightChild, path, destinyNodeValue);
+
+						
+						}
+
+					}
+
+				}
+			if (nodeFound == false) {
+				path.remove(path.size() - 1);
+
+			}
+
+		}
+		
+		
+	}
+
+	private Integer firstCommonAncestorBetween(Integer nodeA, Integer nodeB) {
+		
+		Integer commonAncestor = null;
+		// find a path to nodeA
+		ArrayList<Integer> pathToA = pathToNode(nodeA);
+	// find a path to nodeB
+		ArrayList<Integer> pathToB = pathToNode(nodeB);
+		
+	// Move through resulting arraylists looking for common ancestors
+		boolean found = false;
+		int i = pathToA.size() -1; 
+		int j = pathToB.size() -1;
+		
+		while(!found && i>0 && j>0){
+			if(pathToA.get(i).equals(pathToB.get(j))){
+				found = true;
+				commonAncestor = pathToA.get(i);
+			}
+			else if(pathToA.get(i) < pathToB.get(j)){
+				j--;
+			}
+			else {
+				i--;
+			}
+		
+		}
+		
+		return commonAncestor;
+
+		
+		
+
 	}
 
 	public static void main(String[] args) {
@@ -75,18 +152,43 @@ public class BinaryTree {
 		root.leftChild.rightChild = new BinaryNode(4);
 		root.rightChild.leftChild = new BinaryNode(6);
 		root.rightChild.rightChild = new BinaryNode(7);
-		BinaryTree b= new BinaryTree(root);
-		
+		BinaryTree b = new BinaryTree(root);
+
 		// testing
 		ArrayList<Integer> preOrder = b.preOrderTraversal();
 		System.out.println("Preorder is: " + preOrder.toString());
-		
+
 		ArrayList<Integer> inOrder = b.inOrderTraversal();
 		System.out.println("Inorder is: " + inOrder.toString());
-		
+
 		ArrayList<Integer> postOrder = b.postOrderTraversal();
 		System.out.println("Postorder is: " + postOrder.toString());
+
+		System.out.println("--------------------------------------");
 		
+		
+		
+		
+		// extention for finding first common ancestor
+		root.rightChild.rightChild.leftChild = new BinaryNode(8);
+		root.rightChild.rightChild.rightChild = new BinaryNode(9);
+		
+			//testing path to node
+			ArrayList<Integer> pathTo8 = b.pathToNode(8);
+			System.out.println("Path to node 8 is: " + pathTo8.toString());
+			
+			ArrayList<Integer> pathTo6 = b.pathToNode(6);
+			System.out.println("Path to node 6 is: " + pathTo6.toString());
+			
+
+		
+		
+		Integer nodeA = 8;
+		Integer nodeB = 6;
+		Integer commonAncestor = b.firstCommonAncestorBetween(nodeA, nodeB);
+		
+		System.out.println("Common ancestor between " + nodeA + " and " + nodeB + " is " + commonAncestor);
+
 	}
 
 }
