@@ -47,4 +47,12 @@ public class TestHeap extends TestCase{
       assertEquals(25, heap.size());
     }
 
+    public void testInitialization(){
+      setupCustomConstructor();
+      heap.add(5);
+      //ArrayList<Integer> heapAsList = heap.toList();
+    }
+
+    public v
+
 }
