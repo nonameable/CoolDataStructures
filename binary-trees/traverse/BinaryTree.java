@@ -8,7 +8,7 @@ public class BinaryTree {
 
 	private BinaryNode root;
 	private boolean nodeFound = false;
-	
+
 	public BinaryTree(BinaryNode root) {
 		this.root = root;
 	}
@@ -81,7 +81,7 @@ public class BinaryTree {
 
 	private void pathToNodeHelper(BinaryNode node, ArrayList<Integer> path,
 			Integer destinyNodeValue) {
-		
+
 		path.add(node.value);
 		if (node.value.equals(destinyNodeValue)) {
 			nodeFound = true;
@@ -94,54 +94,118 @@ public class BinaryTree {
 					if (node.rightChild != null) {
 						pathToNodeHelper(node.rightChild, path, destinyNodeValue);
 
-						
-						}
-
 					}
 
 				}
+
+			}
 			if (nodeFound == false) {
 				path.remove(path.size() - 1);
 
 			}
 
 		}
-		
-		
+
 	}
 
 	private Integer firstCommonAncestorBetween(Integer nodeA, Integer nodeB) {
-		
+
 		Integer commonAncestor = null;
 		// find a path to nodeA
 		ArrayList<Integer> pathToA = pathToNode(nodeA);
-	// find a path to nodeB
+		// find a path to nodeB
 		ArrayList<Integer> pathToB = pathToNode(nodeB);
-		
-	// Move through resulting arraylists looking for common ancestors
+
+		// Move through resulting arraylists looking for common ancestors
 		boolean found = false;
-		int i = pathToA.size() -1; 
-		int j = pathToB.size() -1;
-		
-		while(!found && i>0 && j>0){
-			if(pathToA.get(i).equals(pathToB.get(j))){
+		int i = pathToA.size() - 1;
+		int j = pathToB.size() - 1;
+
+		while (!found && i > 0 && j > 0) {
+			if (pathToA.get(i).equals(pathToB.get(j))) {
 				found = true;
 				commonAncestor = pathToA.get(i);
-			}
-			else if(pathToA.get(i) < pathToB.get(j)){
+			} else if (pathToA.get(i) < pathToB.get(j)) {
 				j--;
-			}
-			else {
+			} else {
 				i--;
 			}
-		
+
 		}
-		
+
 		return commonAncestor;
 
-		
-		
+	}
 
+	public int height(BinaryNode root) {
+		int height = -1;
+		height = heightHelper(root);
+
+		return height;
+
+	}
+
+	private int heightHelper(BinaryNode node) {
+		int heightLeft = 0;
+		int heightRight = 0;
+
+		if (node.isLeaf()) {
+			return 1;
+		} else {
+			if (node.leftChild != null) {
+				heightLeft = heightHelper(node.leftChild);
+			}
+
+			if (node.rightChild != null) {
+				heightRight = heightHelper(node.rightChild);
+			}
+
+			int maxHeight = Math.max(heightLeft, heightRight);
+
+			return maxHeight + 1;
+		}
+
+	}
+
+	public boolean isBalanced(BinaryNode root) {
+		Balance balance = isBalancedHelper(root);
+		return balance.isBalanced;
+	}
+
+	private Balance isBalancedHelper(BinaryNode node) {
+		
+		Balance myBalance;
+		Balance leftBalance = null;
+		Balance rightBalance = null;
+		boolean balanced = true;
+		
+		int height;
+		int leftHeight = 0;
+		int rightHeight = 0;
+		
+		if(node.isLeaf()){
+			myBalance =new Balance(1, true);
+		}
+		else {
+			if (node.leftChild != null) {
+				leftBalance = isBalancedHelper(node.leftChild);
+				balanced = leftBalance.isBalanced;
+				leftHeight = leftBalance.height;
+			}
+			if (node.rightChild != null) {
+				rightBalance = isBalancedHelper(node.rightChild);
+				balanced = rightBalance.isBalanced;
+				rightHeight = rightBalance.height;
+			}
+			
+			int difference = Math.abs(rightHeight - leftHeight);
+			balanced = balanced && (difference <= 1);
+			
+			height = Math.max(rightHeight,leftHeight);
+			myBalance = new Balance(height + 1, balanced);
+			
+		}
+		return myBalance;
 	}
 
 	public static void main(String[] args) {
@@ -165,29 +229,41 @@ public class BinaryTree {
 		System.out.println("Postorder is: " + postOrder.toString());
 
 		System.out.println("--------------------------------------");
-		
-		
-		
-		
+
+		System.out.println("TESTS FOR HEIGHT");
+		System.out.println(b.height(root));
+		System.out.println("TESTS FOR HEIGHT");
+
+		System.out.println("TESTS FOR Balanced");
+		System.out.println(b.isBalanced(root));
+		System.out.println("TESTS FOR Balanced");
+
 		// extention for finding first common ancestor
 		root.rightChild.rightChild.leftChild = new BinaryNode(8);
 		root.rightChild.rightChild.rightChild = new BinaryNode(9);
-		
-			//testing path to node
-			ArrayList<Integer> pathTo8 = b.pathToNode(8);
-			System.out.println("Path to node 8 is: " + pathTo8.toString());
-			
-			ArrayList<Integer> pathTo6 = b.pathToNode(6);
-			System.out.println("Path to node 6 is: " + pathTo6.toString());
-			
+		root.rightChild.rightChild.rightChild.leftChild = new BinaryNode(10);
 
-		
-		
+		System.out.println("TESTS FOR HEIGHT extended");
+		System.out.println(b.height(root));
+		System.out.println("TESTS FOR HEIGHT extended ");
+
+		System.out.println("TESTS FOR Balanced extended");
+		System.out.println(b.isBalanced(root));
+		System.out.println("TESTS FOR Balanced extended");
+
+		// testing path to node
+		ArrayList<Integer> pathTo8 = b.pathToNode(8);
+		System.out.println("Path to node 8 is: " + pathTo8.toString());
+
+		ArrayList<Integer> pathTo6 = b.pathToNode(6);
+		System.out.println("Path to node 6 is: " + pathTo6.toString());
+
 		Integer nodeA = 8;
 		Integer nodeB = 6;
 		Integer commonAncestor = b.firstCommonAncestorBetween(nodeA, nodeB);
-		
-		System.out.println("Common ancestor between " + nodeA + " and " + nodeB + " is " + commonAncestor);
+
+		System.out.println("Common ancestor between " + nodeA + " and " + nodeB
+				+ " is " + commonAncestor);
 
 	}
 
