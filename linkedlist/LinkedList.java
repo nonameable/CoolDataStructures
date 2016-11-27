@@ -2,7 +2,7 @@ package linkedlist;
 
 import java.util.Hashtable;
 
-/* Class that represents and Singly LinkedList*/
+/* Class that represents an Singly LinkedList*/
 public class LinkedList {
 
 	/* head Node of the linkedList */
@@ -142,7 +142,7 @@ public class LinkedList {
 		Node n2 = n.next;
 		
 		int i = 0;
-		while(i < k -1 && n2!= null){ // of by one error
+		while(i < k -1 && n2!= null){ // off by one error
 			n2 = n2.next;
 			i = i+1;
 		}
