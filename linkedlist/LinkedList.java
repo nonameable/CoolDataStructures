@@ -72,6 +72,7 @@ public class LinkedList {
 	public void delete(int value) {
 		if (value == head.value) {
 			head = head.next;
+			size = size - 1;
 		} else {
 			Node n = head;
 			Node n2 = n.next;
@@ -111,6 +112,7 @@ public class LinkedList {
 				if (test != null) {
 					n.next = n2.next; // deletes n2
 					n2 = n.next;
+					size = size - 1;
 				} else {
 					table.put(n2.value, n2.value);
 					n = n2;
@@ -120,6 +122,44 @@ public class LinkedList {
 			}
 		}
 	}
+	
+	public Node kthToLastElementWithSize(int k){
+		int desiredPosition = size - 1 - k;
+		Node n = head;
+		int i = 0;
+		while(i < desiredPosition && n!= null){
+			n = n.next;
+			i = i + 1;
+		}
+		
+		return n;
+	}
+	
+	public Node kthToLastElement(int k){
+		
+		
+		Node n = head;
+		Node n2 = n.next;
+		
+		int i = 0;
+		while(i < k -1 && n2!= null){ // of by one error
+			n2 = n2.next;
+			i = i+1;
+		}
+		
+		if(n2!= null){
+			while(n2.next != null){
+				n = n.next;
+				n2 = n2.next;
+			}
+			return n;
+			
+		}else {
+			return null;
+		}
+	}
+	
+	
 
 	public static void main(String[] args) {
 		LinkedList list = new LinkedList();
@@ -129,15 +169,19 @@ public class LinkedList {
 		list.addToTail(2);
 		list.addToTail(3);
 		System.out.println("adds nodes");
+		System.out.println("size now is: " + list.size);
 		System.out.println(list.toString());
 		list.addToHead(-1);
 		System.out.println("adds to head");
+		System.out.println("size now is: " + list.size);
 		System.out.println(list.toString());
 		list.delete(-1);
 		System.out.println("deletes first");
+		System.out.println("size now is: " + list.size);
 		System.out.println(list.toString());
 		list.delete(3);
 		System.out.println("deletes last");
+		System.out.println("size now is: " + list.size);
 		System.out.println(list.toString());
 		list.addToTail(3);
 		System.out.println("adds item just deleted");
@@ -145,6 +189,8 @@ public class LinkedList {
 		list.delete(4);
 		System.out.println("tries to delete item not found in the list");
 		System.out.println(list.toString());
+		
+		System.out.println("size now is: " + list.size);
 
 		System.out.println("------ Removing duplicates testing -------------");
 		list.addToTail(2);
@@ -159,6 +205,14 @@ public class LinkedList {
 		System.out.println("removes duplicates");
 		System.out.println(list.toString());
 
+		System.out.println("------ kth to last element testing -------------");
+		
+		Node withSize = list.kthToLastElementWithSize(2);
+		System.out.println("Test with size: " + withSize.value);
+		
+		Node pointers = list.kthToLastElement(2);
+		System.out.println("Test with 2 pointers: " + pointers.value);
+		
 	}
 
 }
