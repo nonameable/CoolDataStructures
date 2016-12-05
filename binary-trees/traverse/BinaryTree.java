@@ -166,6 +166,36 @@ public class BinaryTree {
 		}
 
 	}
+	
+	public boolean isBinarySearchTree(){
+		boolean isBST = false;
+		isBST = isBSTHelper(root);
+		return isBST;
+	}
+	
+	private boolean isBSTHelper(BinaryNode node){
+		if(node.isLeaf()){
+			return true;
+		}
+		else {
+			boolean leftBST = true;
+			boolean rightBST = true;
+			int leftValue = node.value - 1; // we place the values like this so they don not interfere in case any child is null
+			int rightValue = node.value + 1;
+			
+			if(node.leftChild != null){
+				leftBST = isBSTHelper(node.leftChild);
+				leftValue = node.leftChild.value;
+			}
+			if(node.rightChild != null){
+				rightBST = isBSTHelper(node.rightChild);
+				rightValue = node.rightChild.value;
+			}
+			return leftBST && rightBST && (leftValue <= node.value) && (rightValue >= node.value); 
+		}
+		
+		
+	}
 
 	public boolean isBalanced(BinaryNode root) {
 		Balance balance = isBalancedHelper(root);
@@ -265,6 +295,17 @@ public class BinaryTree {
 		System.out.println("Common ancestor between " + nodeA + " and " + nodeB
 				+ " is " + commonAncestor);
 
+		BinaryNode rootBST = new BinaryNode(8);
+		rootBST.leftChild = new BinaryNode(4);
+		rootBST.rightChild = new BinaryNode(10);
+		rootBST.leftChild.leftChild = new BinaryNode(2);
+		rootBST.leftChild.rightChild = new BinaryNode(5);
+		rootBST.rightChild.leftChild = new BinaryNode(9);
+		rootBST.rightChild.rightChild = new BinaryNode(11);
+		BinaryTree bst = new BinaryTree(rootBST);
+		
+		System.out.println("Is BST: "+ bst.isBinarySearchTree());
+		
 	}
 
 }

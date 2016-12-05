@@ -2,7 +2,7 @@ package linkedlist;
 
 import java.util.Hashtable;
 
-/* Class that represents an Singly LinkedList*/
+/* Class that represents a Singly LinkedList*/
 public class LinkedList {
 
 	/* head Node of the linkedList */
