@@ -1,4 +1,4 @@
-package traverse;
+package binary_trees;
 
 public class BinaryNode {
 	
