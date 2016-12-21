@@ -159,6 +159,45 @@ public class LinkedList {
 		}
 	}
 	
+	// 2 4 5 7 3 1
+	// 4
+	// 2 1 3 4 7 5
+	// 1 2 3 4 5 7
+
+	// 2 5 4 7 3 1
+  	// 2 5 4 7 3 1
+  	// 2 
+
+  	public NodeIndex findNodeByValue(int value){
+  		Node current = head;
+  		int index = 0
+  		while(current != null){
+  			if(current.value == value){
+  				return new NodeIndex(index, current);
+  			}
+  			index = index + 1;
+  			current = current.next;
+  		}
+  		return null;
+  	}
+
+	public Node partitionAroundValue(int value){
+
+		NodeIndex ni = findNodeByValue(value);
+		if(ni == null){
+			return ni;
+		}
+		else if(size <= 1){
+			// do nothing
+		}
+		else{
+			// "swap" the pivot and the first node
+			//start the traversal moving the pivot along
+			//end when the index reaches size - 1
+
+		}
+
+	}
 	
 
 	public static void main(String[] args) {

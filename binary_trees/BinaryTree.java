@@ -9,6 +9,10 @@ public class BinaryTree {
 	private BinaryNode root;
 	private boolean nodeFound = false;
 
+	public BinaryTree() {
+
+	}
+
 	public BinaryTree(BinaryNode root) {
 		this.root = root;
 	}
