@@ -1,5 +1,3 @@
-package linkedlist;
-
 import java.util.Hashtable;
 
 /* Class that represents a Singly LinkedList*/
@@ -33,6 +31,26 @@ public class LinkedList {
 		}
 		size = size + 1;
 
+	}
+
+	public void addToTail(int[] values){
+		
+
+		Node n = head;
+
+		for(int i = 0; i < values.length; i++){
+			if(n == null){
+				head = new Node(values[i]);
+				n = head;
+			} 
+			else {
+				Node toAdd = new Node(values[i]);
+				n.next = toAdd;
+				n = toAdd;
+			}
+			size  = size + 1;
+
+		}
 	}
 
 	public void addToHead(int value) {
@@ -170,31 +188,57 @@ public class LinkedList {
 
   	public NodeIndex findNodeByValue(int value){
   		Node current = head;
-  		int index = 0
+  		Node previous = null;
+  		int index = 0;
   		while(current != null){
   			if(current.value == value){
-  				return new NodeIndex(index, current);
+  				return new NodeIndex(index, current, previous);
   			}
   			index = index + 1;
+  			previous = current;
   			current = current.next;
   		}
   		return null;
   	}
 
-	public Node partitionAroundValue(int value){
+	public void partitionAroundValue(int value){
 
 		NodeIndex ni = findNodeByValue(value);
-		if(ni == null){
-			return ni;
-		}
-		else if(size <= 1){
+		Node previousToPivot = ni.previous;
+		Node pivot = ni.node;
+		int pivotIndex = ni.index;
+		if(ni == null || size <= 1){
 			// do nothing
 		}
 		else{
-			// "swap" the pivot and the first node
-			//start the traversal moving the pivot along
-			//end when the index reaches size - 1
+			//put the pivot at the beginning of the linked list
+			previousToPivot.next = pivot.next;
+			Node oldHead = head;
+			head = pivot;
+			pivot.next = oldHead;
+			System.out.println(this.toString() + "  555555%%%%");
+			previousToPivot = null; // equal to null again, pivot is now the ehad of the list. Maybe this does nothing
+			Node current = head.next;
 
+			while(current != null){ // this means, while I am still traversing the list
+				if(current.value < value){
+					// move pivot up until this position
+					if (head == pivot){
+						head = pivot.next;
+					} else{
+						previousToPivot.next = pivot.next;
+					}
+					Node currentNext = current.next;
+					current.next = pivot;
+					pivot.next = currentNext;
+					previousToPivot = current;
+					current = currentNext;
+
+				}else{
+					current = current.next;
+				}
+			System.out.println(this.toString() + " -------");
+			}
 		}
 
 	}
@@ -251,6 +295,8 @@ public class LinkedList {
 		
 		Node pointers = list.kthToLastElement(2);
 		System.out.println("Test with 2 pointers: " + pointers.value);
+
+
 		
 	}
 

@@ -4,10 +4,12 @@
 public class NodeIndex{
 	int index;
 	Node node;
+	Node previous;
 
-	public NodeIndex(int index, Node node){
+	public NodeIndex(int index, Node node, Node previous){
 		this.index = index;
 		this.node = node;
+		this.previous = previous;
 	}
 	
 }
