@@ -1,8 +1,4 @@
-package binary_trees;
-
 import java.util.ArrayList;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
 public class BinaryTree {
 
@@ -13,8 +9,48 @@ public class BinaryTree {
 
 	}
 
+	public BinaryTree(BinaryTree tree){
+		this.root = tree.root;
+		if(this.root != null){
+			if(tree.root.leftChild != null){
+				createBinaryTree(tree.root.leftChild, this.root, true);
+			}
+			if(tree.root.rightChild != null){
+				createBinaryTree(tree.root.rightChild, this.root, false);
+			}
+		}
+	}
+
+	public void createBinaryTree(BinaryNode originTreeNodeToAdd, BinaryNode parentNode, boolean isLeft){
+		if(originTreeNodeToAdd != null){
+			BinaryNode newNode = new BinaryNode(originTreeNodeToAdd.value);;
+			if(isLeft){
+
+				parentNode.leftChild = newNode;
+			}
+			else {
+				parentNode.rightChild = newNode;
+			}
+			createBinaryTree(originTreeNodeToAdd.leftChild, newNode, true);
+			createBinaryTree(originTreeNodeToAdd.rightChild, newNode, false);
+		}
+		else{
+			if(isLeft){
+				parentNode.leftChild = null;
+			}
+			else {
+				parentNode.rightChild = null;
+			}
+		}
+
+	}
+
 	public BinaryTree(BinaryNode root) {
 		this.root = root;
+	}
+
+	public BinaryNode getRoot(){
+		return this.root;
 	}
 
 	public ArrayList<Integer> preOrderTraversal() {

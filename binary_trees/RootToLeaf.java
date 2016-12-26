@@ -1,5 +1,3 @@
-package binary_trees;
-
 import java.util.ArrayList;
 
 

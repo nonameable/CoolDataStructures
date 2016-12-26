@@ -16,18 +16,7 @@ public class BSTConstruction {
 		// 7
 		
 		// 1 2 3 4 5 6 7
-				  4
-			   /     \
-              2       6
-            /  \     / \
-           1    3   5   7
-
-        // 2 4 6 8 10 12     
-                   6     0:1   3:5, 
-               /      \ 
-             2         10     3:3,  5:5
-              \       /   \
-               1     8     12
+		
                
 
 		BinaryTree bst;
@@ -57,7 +46,7 @@ public class BSTConstruction {
 		
 		if(start <= end){
 			int mid = (start + end) / 2;
-			BinaryNode node = new node(array[mid]);
+			BinaryNode node = new BinaryNode(array[mid]);
 			if(leftChild){
 				parent.left = node;
 			}

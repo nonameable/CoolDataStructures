@@ -1,5 +1,3 @@
-package binary_trees;
-
 public class BinaryNode {
 	
 	public BinaryNode leftChild;
