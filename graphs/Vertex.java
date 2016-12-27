@@ -1,5 +1,3 @@
-package graphs;
-
 import java.util.ArrayList;
 
 public class Vertex {
@@ -7,7 +5,7 @@ public class Vertex {
 	/*String id for distinction when testing*/
 	public String ID;
 	
-	/*Each vertex has a list of vertices it shares and edege with. */
+	/*Each vertex has a list of vertices it shares an edge with. */
 	public ArrayList<Vertex> vertices;
 
 	/*color*/
