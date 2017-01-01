@@ -22,6 +22,12 @@ public class Vertex {
 	
 	/*finishing time for DFS*/
 	public int f;
+
+	/*shortest path weight*/
+	public int spWeight;
+
+	/*shortest path id for dijkstra arrays*/
+	public int id;
 	
 	/*Parent for BFS. Needed to construct the breath first tree*/
 	public Vertex parent;

@@ -14,9 +14,17 @@ public class Graph {
 	
 	/* we have a list of every vertex in the graph */
 	ArrayList<Vertex> vertices;
-	
+	/*We have a list of every edge in the graph. Mainly used for shortest paths, where wieghted edges are taken into account*/
+	ArrayList<Edge> edges;
+
 	public Graph(){
 		vertices = new ArrayList<>();
+		edges = new ArrayList<>();
+
+	}
+
+	public void addEdge(Vertex u, Vertex v, int weight){
+		edges.add(new Edge(u,v,weight));
 	}
 	
 	public ArrayList<Vertex> BFS (Vertex source){
