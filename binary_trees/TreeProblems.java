@@ -1,5 +1,32 @@
 public class TreeProblems {
 	
+
+	/* solves 4.9 when paths start anywhere and end anywhere*/
+	public static ArrayList< Path > pathsThatSum(BinaryTree tree, int value){
+
+
+	}
+	/* Solves 4.9 when paths start at the root and end anywhere*/
+	public static ArrayList< Path > pathsThatSumFromRoot(BinaryTree tree,  int value){ 
+		ArrayList<Path > pathsThatSum = new ArrayList< Path >();
+		Path path = new Path();
+		pathsThatSumHelper(tree.getRoot(), value, pathsThatSum, path);
+		return pathsThatSum;
+	}
+
+	private static void pathsThatSumHelper(BinaryNode node, int value, ArrayList< Path > pathsThatSum , Path path){
+		if(node != null){
+			path.add(node);
+			if(path.partialSum == value){
+				pathsThatSum.add(new Path(path));
+			}
+			pathsThatSumHelper(node.leftChild, value, pathsThatSum, path);
+			pathsThatSumHelper(node.rightChild, value, pathsThatSum, path);
+
+			path.remove();
+		}
+	}
+
 	public static BinaryNode findSuccesorInBST(BinaryTree tree, int value){
 
 		BinaryNode succesor = null;
@@ -17,6 +44,15 @@ public class TreeProblems {
 
 
 
+	}
+
+	public static findLeftMostNode(BinaryNode node){
+		BinaryNode n = node;
+		while(n != null && n.left != null){
+			n = n.left;
+			}
+		}
+		return n;
 	}
 
 	public static BinaryNode findNode(BinaryTree tree, int value){
